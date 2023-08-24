@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  app:
+    container_name: golang_container
+    build: .
+    ports:
+      - '8080:8080'
+    restart: on-failure
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongoDB-Cont
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb_data_cont:/data/db
+
+volumes:
+  mongodb_data_cont:  
