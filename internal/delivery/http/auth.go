@@ -53,7 +53,6 @@ func (d *Delivery) refresh(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Return new tokens as JSON response
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(tokens)
 }

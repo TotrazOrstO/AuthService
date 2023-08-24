@@ -50,10 +50,9 @@ func (s *Service) GenerateTokenPair(ctx context.Context, userID string) (TokenPa
 }
 
 func (s *Service) generateTokenPair(userID string) (TokenPair, error) {
-	// Generate Access Token
 	accessToken := jwt.NewWithClaims(jwt.SigningMethodRS512, jwt.MapClaims{
 		"sub": userID,
-		"exp": time.Now().Add(time.Hour * 1).Unix(), // Token expires in 1 hour
+		"exp": time.Now().Add(time.Hour * 1).Unix(),
 	})
 
 	privateKey, err := os.ReadFile("medods.rsa")
@@ -71,7 +70,6 @@ func (s *Service) generateTokenPair(userID string) (TokenPair, error) {
 		return TokenPair{}, fmt.Errorf("sign token: %w", err)
 	}
 
-	// Generate Refresh Token
 	refreshBytes := make([]byte, 32)
 	_, err = rand.Read(refreshBytes)
 	if err != nil {
